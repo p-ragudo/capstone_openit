@@ -1,0 +1,5 @@
+Tests/
+bin/
+obj/
+*.md
+.DS_Store

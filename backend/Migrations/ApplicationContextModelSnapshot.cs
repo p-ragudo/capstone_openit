@@ -152,6 +152,101 @@ namespace backend.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
+            modelBuilder.Entity("backend.Models.Appliance", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<Guid>("ApplianceCategoryId")
+                        .HasColumnType("uuid");
+
+                    b.Property<Guid?>("ApplicationUserId")
+                        .HasColumnType("uuid");
+
+                    b.Property<DateTimeOffset>("CreatedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<bool>("InverterCapable")
+                        .HasColumnType("boolean");
+
+                    b.Property<string>("Location")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<int>("RatedWatts")
+                        .HasColumnType("integer");
+
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uuid");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ApplianceCategoryId");
+
+                    b.HasIndex("ApplicationUserId");
+
+                    b.ToTable("Appliances");
+                });
+
+            modelBuilder.Entity("backend.Models.ApplianceCategory", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("ApplianceCategories");
+                });
+
+            modelBuilder.Entity("backend.Models.ApplianceUsageLog", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("Id"));
+
+                    b.Property<Guid>("ApplianceId")
+                        .HasColumnType("uuid");
+
+                    b.Property<int>("AverageWatts")
+                        .HasColumnType("integer");
+
+                    b.Property<decimal>("CostAmount")
+                        .HasColumnType("decimal(12,2)");
+
+                    b.Property<int>("DaysPerWeek")
+                        .HasColumnType("integer");
+
+                    b.Property<short>("DaysUsedMask")
+                        .HasColumnType("smallint");
+
+                    b.Property<decimal>("EnergyKwh")
+                        .HasColumnType("decimal(12,3)");
+
+                    b.Property<decimal>("HoursPerDay")
+                        .HasColumnType("decimal(6,2)");
+
+                    b.Property<int>("WeeksPerMonth")
+                        .HasColumnType("integer");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ApplianceId");
+
+                    b.ToTable("ApplianceUsageLogs");
+                });
+
             modelBuilder.Entity("backend.Models.ApplicationUser", b =>
                 {
                     b.Property<Guid>("Id")
@@ -224,6 +319,198 @@ namespace backend.Migrations
                     b.ToTable("AspNetUsers", (string)null);
                 });
 
+            modelBuilder.Entity("backend.Models.Bill", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<DateOnly>("BillingMonth")
+                        .HasColumnType("date");
+
+                    b.Property<DateTimeOffset>("CreatedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<decimal>("DistributionAmount")
+                        .HasColumnType("decimal(12,2)");
+
+                    b.Property<decimal>("EnergyKwh")
+                        .HasColumnType("decimal(12,3)");
+
+                    b.Property<decimal>("GenerationAmount")
+                        .HasColumnType("decimal(12,2)");
+
+                    b.Property<decimal>("GovernmentTaxAmount")
+                        .HasColumnType("decimal(12,2)");
+
+                    b.Property<string>("Status")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<decimal>("TransmissionAmount")
+                        .HasColumnType("decimal(12,2)");
+
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uuid");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Bills");
+                });
+
+            modelBuilder.Entity("backend.Models.CostEstimation", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<Guid>("ApplianceId")
+                        .HasColumnType("uuid");
+
+                    b.Property<Guid?>("ApplicationUserId")
+                        .HasColumnType("uuid");
+
+                    b.Property<DateTimeOffset>("CreatedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<Guid?>("EnergyTariffId")
+                        .HasColumnType("uuid");
+
+                    b.Property<decimal>("EstimatedAnnualCost")
+                        .HasColumnType("decimal(12,2)");
+
+                    b.Property<decimal>("EstimatedMonthlyCost")
+                        .HasColumnType("decimal(12,2)");
+
+                    b.Property<decimal>("HoursPerDay")
+                        .HasColumnType("decimal(6,2)");
+
+                    b.Property<bool>("IsInverter")
+                        .HasColumnType("boolean");
+
+                    b.Property<string>("ProfileName")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<Guid>("TariffId")
+                        .HasColumnType("uuid");
+
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uuid");
+
+                    b.Property<int>("Wattage")
+                        .HasColumnType("integer");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ApplianceId");
+
+                    b.HasIndex("ApplicationUserId");
+
+                    b.HasIndex("EnergyTariffId");
+
+                    b.ToTable("CostEstimations");
+                });
+
+            modelBuilder.Entity("backend.Models.EnergyTariff", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<DateOnly>("EffectiveFrom")
+                        .HasColumnType("date");
+
+                    b.Property<DateOnly>("EffectiveTo")
+                        .HasColumnType("date");
+
+                    b.Property<decimal>("RatePerKwh")
+                        .HasColumnType("decimal(12,4)");
+
+                    b.Property<string>("Region")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("UtilityName")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("EnergyTariff");
+                });
+
+            modelBuilder.Entity("backend.Models.Notification", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("Body")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<DateTimeOffset>("CreatedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<DateTimeOffset>("ReadAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uuid");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Notifications");
+                });
+
+            modelBuilder.Entity("backend.Models.Recommendation", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<Guid?>("ApplicationUserId")
+                        .HasColumnType("uuid");
+
+                    b.Property<DateTimeOffset>("CreatedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<decimal>("EstimatedSavingsAmount")
+                        .HasColumnType("decimal(12,2)");
+
+                    b.Property<string>("SavingsUntil")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("TipType")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uuid");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ApplicationUserId");
+
+                    b.ToTable("Recommendations");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<System.Guid>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole<System.Guid>", null)
@@ -273,6 +560,77 @@ namespace backend.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("backend.Models.Appliance", b =>
+                {
+                    b.HasOne("backend.Models.ApplianceCategory", "ApplianceCategory")
+                        .WithMany()
+                        .HasForeignKey("ApplianceCategoryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("backend.Models.ApplicationUser", "ApplicationUser")
+                        .WithMany()
+                        .HasForeignKey("ApplicationUserId");
+
+                    b.Navigation("ApplianceCategory");
+
+                    b.Navigation("ApplicationUser");
+                });
+
+            modelBuilder.Entity("backend.Models.ApplianceUsageLog", b =>
+                {
+                    b.HasOne("backend.Models.Appliance", "Appliance")
+                        .WithMany()
+                        .HasForeignKey("ApplianceId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Appliance");
+                });
+
+            modelBuilder.Entity("backend.Models.Bill", b =>
+                {
+                    b.HasOne("backend.Models.ApplicationUser", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("backend.Models.CostEstimation", b =>
+                {
+                    b.HasOne("backend.Models.Appliance", "Appliance")
+                        .WithMany()
+                        .HasForeignKey("ApplianceId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("backend.Models.ApplicationUser", "ApplicationUser")
+                        .WithMany()
+                        .HasForeignKey("ApplicationUserId");
+
+                    b.HasOne("backend.Models.EnergyTariff", "EnergyTariff")
+                        .WithMany()
+                        .HasForeignKey("EnergyTariffId");
+
+                    b.Navigation("Appliance");
+
+                    b.Navigation("ApplicationUser");
+
+                    b.Navigation("EnergyTariff");
+                });
+
+            modelBuilder.Entity("backend.Models.Recommendation", b =>
+                {
+                    b.HasOne("backend.Models.ApplicationUser", "ApplicationUser")
+                        .WithMany()
+                        .HasForeignKey("ApplicationUserId");
+
+                    b.Navigation("ApplicationUser");
                 });
 #pragma warning restore 612, 618
         }

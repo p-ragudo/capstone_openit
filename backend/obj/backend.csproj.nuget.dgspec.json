@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "D:\\projects\\bootcamp\\capstone_openit\\backend\\backend.csproj": {}
+    "/Users/stephenrainevilleta/Downloads/OpenITCapstone/capstone_openit/backend/backend.csproj": {}
   },
   "projects": {
-    "D:\\projects\\bootcamp\\capstone_openit\\backend\\backend.csproj": {
+    "/Users/stephenrainevilleta/Downloads/OpenITCapstone/capstone_openit/backend/backend.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\projects\\bootcamp\\capstone_openit\\backend\\backend.csproj",
+        "projectUniqueName": "/Users/stephenrainevilleta/Downloads/OpenITCapstone/capstone_openit/backend/backend.csproj",
         "projectName": "backend",
-        "projectPath": "D:\\projects\\bootcamp\\capstone_openit\\backend\\backend.csproj",
-        "packagesPath": "C:\\Users\\Paolo Ragudo\\.nuget\\packages\\",
-        "outputPath": "D:\\projects\\bootcamp\\capstone_openit\\backend\\obj\\",
+        "projectPath": "/Users/stephenrainevilleta/Downloads/OpenITCapstone/capstone_openit/backend/backend.csproj",
+        "packagesPath": "/Users/stephenrainevilleta/.nuget/packages/",
+        "outputPath": "/Users/stephenrainevilleta/Downloads/OpenITCapstone/capstone_openit/backend/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\Paolo Ragudo\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "/Users/stephenrainevilleta/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net10.0"
@@ -90,7 +90,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.203/PortableRuntimeIdentifierGraph.json",
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/10.0.203/PortableRuntimeIdentifierGraph.json",
           "packagesToPrune": {
             "Microsoft.AspNetCore": "(,10.0.32767]",
             "Microsoft.AspNetCore.Antiforgery": "(,10.0.32767]",
