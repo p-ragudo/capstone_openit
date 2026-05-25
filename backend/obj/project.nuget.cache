@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "WN/baVwIbE8=",
+  "dgSpecHash": "fO2sjmsoJKM=",
   "success": true,
-  "projectFilePath": "C:\\Users\\CL3\\Videos\\capstone_project\\backend\\backend.csproj",
+  "projectFilePath": "C:\\Users\\CL3\\Videos\\capstone_openit\\backend\\backend.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\CL3\\.nuget\\packages\\humanizer.core\\2.14.1\\humanizer.core.2.14.1.nupkg.sha512",
     "C:\\Users\\CL3\\.nuget\\packages\\microsoft.aspnetcore.authentication.cookies\\2.3.10\\microsoft.aspnetcore.authentication.cookies.2.3.10.nupkg.sha512",
@@ -45,9 +45,9 @@
       "code": "NU1510",
       "level": "Warning",
       "message": "PackageReference Microsoft.AspNetCore.Authentication.Cookies will not be pruned. Consider removing this package from your dependencies, as it is likely unnecessary.",
-      "projectPath": "C:\\Users\\CL3\\Videos\\capstone_project\\backend\\backend.csproj",
+      "projectPath": "C:\\Users\\CL3\\Videos\\capstone_openit\\backend\\backend.csproj",
       "warningLevel": 1,
-      "filePath": "C:\\Users\\CL3\\Videos\\capstone_project\\backend\\backend.csproj",
+      "filePath": "C:\\Users\\CL3\\Videos\\capstone_openit\\backend\\backend.csproj",
       "libraryId": "Microsoft.AspNetCore.Authentication.Cookies",
       "targetGraphs": [
         "net10.0"

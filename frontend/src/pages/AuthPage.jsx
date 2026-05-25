@@ -5,6 +5,7 @@ function AuthPage() {
     const { login, register } = useAuth()
     const [view, setView] = useState('login')
     const [email, setEmail] = useState('')
+    const [displayName, setDisplayName] = useState('')
     const [password, setPassword] = useState('')
     const [error, setError] = useState(null)
 
@@ -14,7 +15,7 @@ function AuthPage() {
             if (view === 'login') {
                 await login(email, password)
             } else {
-                await register(email, password)
+                await register(email, password, displayName)
             }
         } catch (e) {
             setError(e.message)
@@ -27,6 +28,20 @@ function AuthPage() {
             <div>
                 {/* Replace span with p or any h1, h2 if any styling complications */}
                 <span>{ view === 'register' ? 'Register' : 'Login' }</span>
+
+                { 
+                    view === 'register' ?
+                    <div>
+                        <label>Name</label>
+                        <input 
+                            type="text"
+                            value={displayName}
+                            onChange={e => setDisplayName(e.target.value)}
+                        />
+                    </div>
+                    : <></>
+                }
+
                 <div>
                     <label>Email</label>
                     <input 

@@ -7,28 +7,39 @@ export const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(undefined)
 
     useEffect(() => {
-        requestJson('/manage/info', { root: true })
+        requestJson('/api/auth/user', { root: true })
             .then(setUser)
             .catch(() => setUser(null))
     }, [])
 
-    const register = async (email, password) => {
-        await requestJson('/register', {
-            root: true,
-            method: 'POST',
-            body: JSON.stringify({ email, password }),
-        })
+    const register = async (email, password, displayName) => {
+        try {
+            await requestJson('/api/auth/register', {
+                root: true,
+                method: 'POST',
+                body: JSON.stringify({ 
+                    Email: email, 
+                    Password: password, 
+                    DisplayName: displayName 
+                }),
+            })
+        } catch (error) {
+            console.error(error)
+        }
 
         await login(email, password)
     }
 
     const login = async (email, password) => {
-        await requestJson('/login?useCookies=true', {
+        await requestJson('/api/auth/login', {
             root: true,
             method: 'POST',
-            body: JSON.stringify({ email, password }),
+            body: JSON.stringify({ 
+                Email: email, 
+                Password: password 
+            }),
         })
-        const info = await requestJson('/manage/info', { root: true })
+        const info = await requestJson('/api/auth/user', { root: true })
         setUser(info)
     }
 

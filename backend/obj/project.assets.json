@@ -2687,11 +2687,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\CL3\\Videos\\capstone_project\\backend\\backend.csproj",
+      "projectUniqueName": "C:\\Users\\CL3\\Videos\\capstone_openit\\backend\\backend.csproj",
       "projectName": "backend",
-      "projectPath": "C:\\Users\\CL3\\Videos\\capstone_project\\backend\\backend.csproj",
+      "projectPath": "C:\\Users\\CL3\\Videos\\capstone_openit\\backend\\backend.csproj",
       "packagesPath": "C:\\Users\\CL3\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\CL3\\Videos\\capstone_project\\backend\\obj\\",
+      "outputPath": "C:\\Users\\CL3\\Videos\\capstone_openit\\backend\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

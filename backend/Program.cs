@@ -1,6 +1,8 @@
 using backend.Models;
 using backend.Data;
 using Microsoft.EntityFrameworkCore;
+using backend.Services;
+using Microsoft.AspNetCore.Identity;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -8,6 +10,7 @@ builder.Services.AddDbContext<ApplicationContext>();
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Services.AddScoped<AuthService>();
 
 builder.Services.AddCors(options => {
     options.AddPolicy("AllowFrontend", policy => {
@@ -24,7 +27,7 @@ builder.Services.AddCors(options => {
 });
 
 builder.Services.AddAuthorization();
-builder.Services.AddIdentityApiEndpoints<ApplicationUser>(options =>
+builder.Services.AddIdentityCore<ApplicationUser>(options =>
 {
     options.Password.RequiredLength = 8;
     options.Password.RequireDigit = false;
@@ -32,7 +35,26 @@ builder.Services.AddIdentityApiEndpoints<ApplicationUser>(options =>
     options.Password.RequireUppercase = false;
     options.Password.RequireNonAlphanumeric = false;
 })
-    .AddEntityFrameworkStores<ApplicationContext>();
+    .AddEntityFrameworkStores<ApplicationContext>()
+    .AddSignInManager<SignInManager<ApplicationUser>>();
+builder.Services.AddAuthentication(options =>
+{
+    options.DefaultAuthenticateScheme = IdentityConstants.ApplicationScheme;
+    options.DefaultChallengeScheme = IdentityConstants.ApplicationScheme;
+    options.DefaultSignOutScheme = IdentityConstants.ApplicationScheme;
+})
+.AddCookie(IdentityConstants.ApplicationScheme, options =>
+{
+    options.Cookie.SameSite = SameSiteMode.Lax;
+    options.Cookie.SecurePolicy = CookieSecurePolicy.SameAsRequest;
+
+    options.Events.OnRedirectToLogin = context =>
+    {
+        context.Response.StatusCode = StatusCodes.Status401Unauthorized;
+        return Task.CompletedTask;
+    };
+});
+
 
 
 // ---------------------------------------------
@@ -40,13 +62,12 @@ builder.Services.AddIdentityApiEndpoints<ApplicationUser>(options =>
 
 var app = builder.Build();
 
-using (var scope = app.Services.CreateScope())
+if(app.Environment.IsDevelopment())
 {
+    using var scope = app.Services.CreateScope();
     var db = scope.ServiceProvider.GetRequiredService<ApplicationContext>();
     db.Database.Migrate();
 }
-
-app.MapIdentityApi<ApplicationUser>();
 
 app.UseCors("AllowFrontend");
 
