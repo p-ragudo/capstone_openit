@@ -1,14 +1,16 @@
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import Navbar from "../components/Navbar";
 import DashboardAsset1 from "../assets/DashboardAsset1.png";
 
 const CHART_DATA = [
-  { month: "Jan", pct: 28 },
-  { month: "Feb", pct: 22 },
-  { month: "Mar", pct: 100 },
-  { month: "Apr", pct: 74 },
-  { month: "May", pct: 55 },
-  { month: "Jun", pct: 34 },
-  { month: "Jul", pct: 20 },
+  { month: "Jan", pct: 28,  kwh: 255, amount: "₱1,175" },
+  { month: "Feb", pct: 22,  kwh: 215, amount: "₱980"   },
+  { month: "Mar", pct: 100, kwh: 604, amount: "₱7,258" },
+  { month: "Apr", pct: 74,  kwh: 448, amount: "₱5,370" },
+  { month: "May", pct: 55,  kwh: 333, amount: "₱3,996" },
+  { month: "Jun", pct: 34,  kwh: 206, amount: "₱2,470" },
+  { month: "Jul", pct: 20,  kwh: 121, amount: "₱1,452" },
 ];
 
 const TOP_CONSUMERS = [
@@ -22,10 +24,10 @@ const TOP_CONSUMERS = [
 const TICK_COUNT = 30;
 const FILLED_TICKS = Math.round(TICK_COUNT * 0.71);
 
-function ArrowBtn() {
+function ArrowBtn({ onClick }) {
   return (
-    <button className="card-arrow-btn" aria-label="View details">
-      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+    <button className="card-arrow-btn" aria-label="View details" onClick={onClick}>
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round">
         <line x1="7" y1="17" x2="17" y2="7" />
         <polyline points="7 7 17 7 17 17" />
       </svg>
@@ -55,6 +57,15 @@ function CalendarIcon() {
 }
 
 function DashboardPage() {
+  const navigate = useNavigate();
+  const [fabOpen, setFabOpen] = useState(false);
+  const [hoveredBar, setHoveredBar] = useState(null);
+
+  function goTo(path) {
+    setFabOpen(false);
+    navigate(path, { state: { openAdd: true } });
+  }
+
   return (
     <div className="page">
       <Navbar />
@@ -76,7 +87,7 @@ function DashboardPage() {
           <div className="center-cards">
 
             <div className="card">
-              <ArrowBtn />
+              <ArrowBtn onClick={() => navigate("/TrackAppliances")} />
               <div className="card-title-row">
                 <span className="card-icon"><MoneyIcon /></span>
                 Estimated Consumption
@@ -94,7 +105,7 @@ function DashboardPage() {
             </div>
 
             <div className="card">
-              <ArrowBtn />
+              <ArrowBtn onClick={() => navigate("/BillHistory")} />
               <div className="card-title-row">
                 <span className="card-icon"><CalendarIcon /></span>
                 Last Month's Bill
@@ -107,7 +118,7 @@ function DashboardPage() {
 
           {/* Right: Top Consumers */}
           <div className="card top-consumers-card">
-            <ArrowBtn />
+            <ArrowBtn onClick={() => navigate("/TrackAppliances")} />
             <h3 className="card-heading">Top Consumers</h3>
             <p className="muted" style={{ fontSize: "13px", marginTop: "4px" }}>
               Appliances ranked by weekly load.
@@ -135,18 +146,30 @@ function DashboardPage() {
           <div className="card monthly-card">
             <div className="monthly-card-header">
               <span className="monthly-card-title">Monthly Usage</span>
-              <button className="monthly-arrow-btn" aria-label="View details">
-                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+              <button className="monthly-arrow-btn" aria-label="View details" onClick={() => navigate("/BillHistory")}>
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round">
                   <line x1="7" y1="17" x2="17" y2="7" />
                   <polyline points="7 7 17 7 17 17" />
                 </svg>
               </button>
             </div>
             <div className="bar-chart">
-              {CHART_DATA.map(({ month, pct }) => (
-                <div key={month} className="bar-col">
+              {CHART_DATA.map(({ month, pct, kwh, amount }) => (
+                <div
+                  key={month}
+                  className="bar-col"
+                  onMouseEnter={() => setHoveredBar(month)}
+                  onMouseLeave={() => setHoveredBar(null)}
+                >
+                  {hoveredBar === month && (
+                    <div className="bar-tooltip">
+                      <span className="bar-tooltip-month">{month}</span>
+                      <span className="bar-tooltip-row"><span>kWh</span><strong>{kwh}</strong></span>
+                      <span className="bar-tooltip-row"><span>Cost</span><strong>{amount}</strong></span>
+                    </div>
+                  )}
                   <div className="bar-space">
-                    <div className="bar" style={{ height: `${pct}%` }} />
+                    <div className={`bar${hoveredBar === month ? " bar-hovered" : ""}`} style={{ height: `${pct}%` }} />
                   </div>
                   <span className="bar-label">{month}</span>
                 </div>
@@ -156,8 +179,17 @@ function DashboardPage() {
 
         </div>
 
-        {/* Layer 4 — FAB */}
-        <button className="fab">+</button>
+        {/* Layer 4 — FAB + drop-up */}
+        {fabOpen && <div className="fab-backdrop" onClick={() => setFabOpen(false)} />}
+        <div className="fab-wrap">
+          {fabOpen && (
+            <div className="fab-menu">
+              <button className="fab-menu-item" onClick={() => goTo("/BillHistory")}>Add Bill</button>
+              <button className="fab-menu-item" onClick={() => goTo("/TrackAppliances")}>Add Appliance</button>
+            </div>
+          )}
+          <button className={`fab${fabOpen ? " fab-open" : ""}`} onClick={() => setFabOpen(v => !v)}>+</button>
+        </div>
 
       </main>
     </div>
