@@ -17,6 +17,7 @@ public class ApplicationContext : IdentityDbContext<ApplicationUser, IdentityRol
     public DbSet<ApplianceUsageLog> ApplianceUsageLogs { get; set; }
     public DbSet<Bill> Bills { get; set; }
     public DbSet<CostEstimation> CostEstimations { get; set; }
+    public DbSet<EnergyTariff> EnergyTariffs { get; set; }
     public DbSet<Notification> Notifications { get; set; }
     public DbSet<Recommendation> Recommendations { get; set; }
 

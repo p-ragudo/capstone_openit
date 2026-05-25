@@ -25,6 +25,10 @@ public class ApplianceUsageLog
     [Column(TypeName = "decimal(12,2)")]
     public decimal CostAmount { get; set; }
 
+    public int Quantity { get; set; }
+
+    public int Wattage { get; set; }
+
 
     public Appliance? Appliance { get; set; }
 }

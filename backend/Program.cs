@@ -10,7 +10,11 @@ builder.Services.AddDbContext<ApplicationContext>();
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
 builder.Services.AddScoped<AuthService>();
+builder.Services.AddScoped<BillService>();
+builder.Services.AddScoped<ApplianceCategoryService>();
+
 
 builder.Services.AddCors(options => {
     options.AddPolicy("AllowFrontend", policy => {
