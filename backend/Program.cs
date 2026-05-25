@@ -35,18 +35,18 @@ builder.Services.AddIdentityApiEndpoints<ApplicationUser>(options =>
     .AddEntityFrameworkStores<ApplicationContext>();
 
 
-// ---------------------------------------
+// ---------------------------------------------
 
 
 var app = builder.Build();
-
-app.MapIdentityApi<ApplicationUser>();
 
 using (var scope = app.Services.CreateScope())
 {
     var db = scope.ServiceProvider.GetRequiredService<ApplicationContext>();
     db.Database.Migrate();
 }
+
+app.MapIdentityApi<ApplicationUser>();
 
 app.UseCors("AllowFrontend");
 
