@@ -37,6 +37,7 @@ builder.Services.AddIdentityCore<ApplicationUser>(options =>
 })
     .AddEntityFrameworkStores<ApplicationContext>()
     .AddSignInManager<SignInManager<ApplicationUser>>();
+
 builder.Services.AddAuthentication(options =>
 {
     options.DefaultAuthenticateScheme = IdentityConstants.ApplicationScheme;
@@ -54,7 +55,6 @@ builder.Services.AddAuthentication(options =>
         return Task.CompletedTask;
     };
 });
-
 
 
 // ---------------------------------------------
