@@ -5,6 +5,7 @@ namespace backend.Models;
 public class ApplianceUsageLog
 {
     public long Id { get; set; }
+    public Guid UserId { get; set; }
 
     public Guid ApplianceId { get; set; }
 

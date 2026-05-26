@@ -15,6 +15,7 @@ builder.Services.AddScoped<AuthService>();
 builder.Services.AddScoped<BillService>();
 builder.Services.AddScoped<ApplianceCategoryService>();
 builder.Services.AddScoped<ApplianceService>();
+builder.Services.AddScoped<ApplianceUsageLogService>();
 
 
 builder.Services.AddCors(options => {

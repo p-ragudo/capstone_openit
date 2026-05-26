@@ -21,3 +21,16 @@ public record AddApplianceDto(
     int RatedWatts,
     bool InverterCapable
 );
+
+public record AddApplianceUsageLogDto(
+    Guid ApplianceId,
+    decimal HoursPerDay,
+    int DaysPerWeek,
+    int WeeksPerMonth,
+    short DaysUsedMask,
+    int AverageWatts,
+    decimal EnergyKwh,
+    decimal CostAmount,
+    int Quantity,
+    int Wattage
+);
