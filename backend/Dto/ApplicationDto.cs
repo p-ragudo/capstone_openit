@@ -42,3 +42,14 @@ public record AddEnergyTariffDto(
     DateOnly EffectiveFrom,
     DateOnly EffectiveTo
 );
+
+public record AddCostEstimationDto(
+    Guid ApplianceId,
+    Guid TariffId,
+    string ProfileName,
+    int Wattage,
+    decimal HoursPerDay,
+    bool IsInverter,
+    decimal EstimatedMonthlyCost,
+    decimal EstimatedAnnualCost
+);
