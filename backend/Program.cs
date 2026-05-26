@@ -14,6 +14,7 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddScoped<AuthService>();
 builder.Services.AddScoped<BillService>();
 builder.Services.AddScoped<ApplianceCategoryService>();
+builder.Services.AddScoped<ApplianceService>();
 
 
 builder.Services.AddCors(options => {
@@ -39,8 +40,8 @@ builder.Services.AddIdentityCore<ApplicationUser>(options =>
     options.Password.RequireUppercase = false;
     options.Password.RequireNonAlphanumeric = false;
 })
-    .AddEntityFrameworkStores<ApplicationContext>()
-    .AddSignInManager<SignInManager<ApplicationUser>>();
+.AddEntityFrameworkStores<ApplicationContext>()
+.AddSignInManager<SignInManager<ApplicationUser>>();
 
 builder.Services.AddAuthentication(options =>
 {

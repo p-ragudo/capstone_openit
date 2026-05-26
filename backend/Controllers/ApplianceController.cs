@@ -9,36 +9,36 @@ namespace backend.Controllers;
 [Authorize]
 [ApiController]
 [Route("api/[controller]")]
-public class BillsController : ControllerBase
+public class AppliancesController : ControllerBase
 {
-    private readonly BillService _billService;
+    private readonly ApplianceService _applianceService;
 
-    public BillsController(BillService billService)
+    public AppliancesController(ApplianceService applianceService)
     {
-        _billService = billService;
+        _applianceService = applianceService;
     }
 
     [HttpPost]
-    public async Task<IActionResult> Create([FromBody] AddBillDto request)
+    public async Task<IActionResult> Create([FromBody] AddApplianceDto request)
     {
         if(this.GetUserGuid() is not Guid userId)
         {
             return this.UnauthorizedMessage();
         }
 
-        var result = await _billService.AddBillAsync(request, userId);
-        return Ok(result);  
+        var result = await _applianceService.AddApplianceAsync(request, userId);
+        return Ok(result);
     }
 
     [HttpGet]
-    public async Task<IActionResult> GetUserBills()
+    public async Task<IActionResult> GetUserAppliances()
     {
         if(this.GetUserGuid() is not Guid userId)
         {
             return this.UnauthorizedMessage();
         }
 
-        var result = await _billService.GetUserBillsAsync(userId);
+        var result = await _applianceService.GetUserAppliancesAsync(userId);
         return Ok(result);
     }
 }

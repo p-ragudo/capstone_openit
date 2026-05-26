@@ -1,3 +1,5 @@
+namespace backend.Dto;
+
 public record AddBillDto(
     DateOnly? BillingMonth,
     DateOnly DueDate,
@@ -11,3 +13,11 @@ public record AddBillDto(
 );
 
 public record AddApplianceCategoryDto(string Name);
+
+public record AddApplianceDto(
+    Guid ApplianceCategoryId,
+    string Name,
+    string Location,
+    int RatedWatts,
+    bool InverterCapable
+);

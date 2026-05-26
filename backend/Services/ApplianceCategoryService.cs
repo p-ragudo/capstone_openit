@@ -1,6 +1,7 @@
 using backend.Models;
 using backend.Data;
 using Microsoft.EntityFrameworkCore;
+using backend.Dto;
 
 namespace backend.Services;
 
@@ -13,11 +14,11 @@ public class ApplianceCategoryService
         _context = context;
     }
 
-    public async Task<ApplianceCategory> AddApplianceCategoryAsync(string name)
+    public async Task<ApplianceCategory> AddApplianceCategoryAsync(AddApplianceCategoryDto dto)
     {
         var newApplianceCategory = new ApplianceCategory
         {
-            Name = name
+            Name = dto.Name
         };
 
         await _context.ApplianceCategories.AddAsync(newApplianceCategory);

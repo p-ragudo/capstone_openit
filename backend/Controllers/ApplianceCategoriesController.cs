@@ -2,6 +2,7 @@ using backend.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
+using backend.Dto;
 
 namespace backend.Controllers;
 
@@ -19,12 +20,12 @@ public class ApplianceCategoriesController : ControllerBase
     [HttpPost]
     public async Task<IActionResult> Create([FromBody] AddApplianceCategoryDto request)
     {
-        var result = await _categoryService.AddApplianceCategoryAsync(request.Name);
+        var result = await _categoryService.AddApplianceCategoryAsync(request);
         return Ok(result);
     }
 
     [HttpGet]
-    public async Task<IActionResult> GetAll()
+    public async Task<IActionResult> GetApplianceCategories()
     {
         var result = await _categoryService.GetApplianceCategoriesAsync();
         return Ok(result);
