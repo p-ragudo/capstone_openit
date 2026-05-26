@@ -59,4 +59,21 @@ public class BillsController : ControllerBase
 
         return Ok(updatedBill);
     }
+
+    [HttpDelete("{id:guid}")]
+    public async Task<IActionResult> Delete([FromRoute] Guid id)
+    {
+        if (this.GetUserGuid() is not Guid userId)
+        {
+            return this.UnauthorizedMessage();
+        }
+
+        var removed = await _billService.DeleteBillAsync(id, userId);
+        if (!removed)
+        {
+            return NotFound("Bill not found or you do not have permission to remove it.");
+        }
+
+        return NoContent();
+    }
 }

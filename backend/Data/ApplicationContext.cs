@@ -27,7 +27,7 @@ public class ApplicationContext : IdentityDbContext<ApplicationUser, IdentityRol
         if(!optionsBuilder.IsConfigured)
         {
             var connectionString = Environment.GetEnvironmentVariable("ConnectionStrings__Default")
-                ?? "Host=localhost;Port=5432;Database=application;Username=postgres;Password=1234";
+                ?? "Host=localhost;Port=5432;Database=application;Username=postgres;Password=sqlraine16";
             
             optionsBuilder.UseNpgsql(connectionString);
         }

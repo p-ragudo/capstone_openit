@@ -78,3 +78,28 @@ public record AddCostEstimationDto(
     decimal EstimatedMonthlyCost,
     decimal EstimatedAnnualCost
 );
+
+public record AddApplianceSummaryDto(
+    string Name,
+    string Status,
+    int Watts,
+    decimal MonthlyKwh,
+    decimal CostPerMonth
+);
+
+public record EditApplianceSummaryDto(
+    string? Name,
+    string? Status,
+    int? Watts,
+    decimal? MonthlyKwh,
+    decimal? CostPerMonth
+);
+
+public record ApplianceSummaryDto(
+    Guid Id,
+    string Name,
+    string Status,
+    int Watts,
+    decimal MonthlyKwh,
+    decimal CostPerMonth
+);

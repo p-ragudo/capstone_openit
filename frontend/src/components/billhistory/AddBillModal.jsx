@@ -38,7 +38,7 @@ export default function AddBillModal({ onClose, editRow = null }) {
 
   function handleSubmit() {
     if (!amount || !kwh) return;
-    addOrUpdateBill({ billMonth, billYear, amount, kwh, dueMonth, dueDay });
+    addOrUpdateBill({ id: editRow?.id, billMonth, billYear, amount, kwh, dueMonth, dueDay });
     onClose();
   }
 

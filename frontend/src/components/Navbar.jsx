@@ -2,6 +2,9 @@ import { useState, useRef, useEffect } from "react";
 import "../styles/components/navbar.css";
 import { NavLink } from "react-router-dom";
 import { useAuth } from "../contexts/AuthContext";
+import { useBills } from "../contexts/BillContext";
+import { useAppliances } from "../contexts/ApplianceContext";
+import { applySeedData, removeSeedData } from "../services/SeedService";
 import Logo from "../assets/Logo.png";
 
 const NAV_ITEMS = [
@@ -13,7 +16,10 @@ const NAV_ITEMS = [
 
 function Navbar() {
   const { logout } = useAuth();
+  const { refreshBills } = useBills();
+  const { refreshAppliances } = useAppliances();
   const [dropdownOpen, setDropdownOpen] = useState(false);
+  const [seedBusy, setSeedBusy] = useState(false);
   const dropdownRef = useRef(null);
 
   useEffect(() => {
@@ -25,6 +31,37 @@ function Navbar() {
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
+
+  async function handleSeedApply() {
+    if (seedBusy) return;
+    setSeedBusy(true);
+    try {
+      const result = await applySeedData();
+      await Promise.all([refreshBills(), refreshAppliances()]);
+      window.alert(`Seeded ${result?.billsAdded ?? 0} bills and ${result?.appliancesAdded ?? 0} appliances.`);
+    } catch (error) {
+      console.error(error);
+      window.alert("Failed to seed data. Please try again.");
+    } finally {
+      setSeedBusy(false);
+    }
+  }
+
+  async function handleSeedRemove() {
+    if (seedBusy) return;
+    if (!window.confirm("Remove seeded sample data for this account?")) return;
+    setSeedBusy(true);
+    try {
+      const result = await removeSeedData();
+      await Promise.all([refreshBills(), refreshAppliances()]);
+      window.alert(`Removed ${result?.billsRemoved ?? 0} bills and ${result?.appliancesRemoved ?? 0} appliances.`);
+    } catch (error) {
+      console.error(error);
+      window.alert("Failed to remove seed data. Please try again.");
+    } finally {
+      setSeedBusy(false);
+    }
+  }
 
   return (
     <nav className="navbar">
@@ -54,6 +91,13 @@ function Navbar() {
             <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9" />
             <path d="M13.73 21a2 2 0 0 1-3.46 0" />
           </svg>
+        </button>
+
+        <button className="seed-btn" onClick={handleSeedApply} disabled={seedBusy}>
+          Seed Data
+        </button>
+        <button className="seed-btn seed-btn-outline" onClick={handleSeedRemove} disabled={seedBusy}>
+          Remove Seed
         </button>
 
         <div className="avatar-wrapper" ref={dropdownRef}>

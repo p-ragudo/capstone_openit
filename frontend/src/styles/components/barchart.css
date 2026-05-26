@@ -71,3 +71,10 @@
 .bar-tooltip-month { font-size: 11px; font-weight: 700; color: var(--amber); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 2px; }
 .bar-tooltip-row   { display: flex; justify-content: space-between; gap: 12px; font-size: 12px; color: rgba(255, 255, 255, 0.7); }
 .bar-tooltip-row strong { color: #fff; font-weight: 600; }
+
+.bar-empty {
+  font-size: 12px;
+  color: var(--text-muted);
+  align-self: center;
+  padding: 18px 0;
+}

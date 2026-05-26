@@ -19,14 +19,14 @@ public class AppliancesController : ControllerBase
     }
 
     [HttpPost]
-    public async Task<IActionResult> Create([FromBody] AddApplianceDto request)
+    public async Task<IActionResult> Create([FromBody] AddApplianceSummaryDto request)
     {
         if(this.GetUserGuid() is not Guid userId)
         {
             return this.UnauthorizedMessage();
         }
 
-        var result = await _applianceService.AddApplianceAsync(request, userId);
+        var result = await _applianceService.AddApplianceSummaryAsync(request, userId);
         return Ok(result);
     }
 
@@ -38,7 +38,41 @@ public class AppliancesController : ControllerBase
             return this.UnauthorizedMessage();
         }
 
-        var result = await _applianceService.GetUserAppliancesAsync(userId);
+        var result = await _applianceService.GetUserApplianceSummariesAsync(userId);
         return Ok(result);
+    }
+
+    [HttpPut("{id:guid}")]
+    public async Task<IActionResult> Update([FromRoute] Guid id, [FromBody] EditApplianceSummaryDto request)
+    {
+        if (this.GetUserGuid() is not Guid userId)
+        {
+            return this.UnauthorizedMessage();
+        }
+
+        var updated = await _applianceService.UpdateApplianceSummaryAsync(id, request, userId);
+        if (updated == null)
+        {
+            return NotFound("Appliance not found or you do not have permission to modify it.");
+        }
+
+        return Ok(updated);
+    }
+
+    [HttpDelete("{id:guid}")]
+    public async Task<IActionResult> Delete([FromRoute] Guid id)
+    {
+        if (this.GetUserGuid() is not Guid userId)
+        {
+            return this.UnauthorizedMessage();
+        }
+
+        var removed = await _applianceService.DeleteApplianceAsync(id, userId);
+        if (!removed)
+        {
+            return NotFound("Appliance not found or you do not have permission to remove it.");
+        }
+
+        return NoContent();
     }
 }

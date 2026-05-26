@@ -69,4 +69,18 @@ public class BillService
 
         return existingBill;
     }
+
+    public async Task<bool> DeleteBillAsync(Guid billId, Guid userId)
+    {
+        var existingBill = await _context.Bills.FindAsync(billId);
+
+        if (existingBill == null || existingBill.UserId != userId)
+        {
+            return false;
+        }
+
+        _context.Bills.Remove(existingBill);
+        await _context.SaveChangesAsync();
+        return true;
+    }
 }

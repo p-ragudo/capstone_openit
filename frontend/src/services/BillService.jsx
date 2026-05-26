@@ -15,3 +15,9 @@ export const updateBill = async (id, updatedFields) => {
         body: JSON.stringify(updatedFields)
     })
 }
+
+export const deleteBill = async (id) => {
+    return requestJson(`bills/${id}`, {
+        method: 'DELETE'
+    })
+}
