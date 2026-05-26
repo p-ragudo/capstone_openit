@@ -1,10 +1,10 @@
 import { requestJson } from "./ApiClient"
 
-export const AddEnergyTariffAsync = async (energyTariff) => {
+export const addEnergyTariffAsync = async (energyTariff) => {
     return requestJson('tariffs', {
         method: 'POST',
         body: JSON.stringify(energyTariff)
     })
 }
 
-export const GetAllEnergyTariffs = async () => requestJson('tariffs')
+export const getAllEnergyTariffs = async () => requestJson('tariffs')

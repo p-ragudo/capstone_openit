@@ -41,4 +41,22 @@ public class ApplianceUsageLogsController : ControllerBase
         var result = await _applianceUsageLogService.GetUserApplianceUsageLogsAsync(userId);
         return Ok(result);
     }
+
+    [HttpPut("{id:long}")]
+    public async Task<IActionResult> Update([FromRoute] long id, [FromBody] EditApplianceUsageLogDto request)
+    {
+        if (this.GetUserGuid() is not Guid userId)
+        {
+            return this.UnauthorizedMessage();
+        }
+
+        var updatedLog = await _applianceUsageLogService.UpdateApplianceUsageLogAsync(id, request, userId);
+
+        if (updatedLog == null)
+        {
+            return NotFound("Usage log entry not found or you do not have permission to modify it.");
+        }
+
+        return Ok(updatedLog);
+    }
 }

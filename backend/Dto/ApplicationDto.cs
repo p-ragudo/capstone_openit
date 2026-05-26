@@ -12,6 +12,18 @@ public record AddBillDto(
     string? Status
 );
 
+public record EditBillDto(
+    DateOnly? BillingMonth,
+    DateOnly? DueDate,
+    decimal? GenerationAmount,
+    decimal? TransmissionAmount,
+    decimal? DistributionAmount,
+    decimal? GovernmentTaxAmount,
+    decimal? EnergyKwh,
+    decimal? TotalAmount,
+    string? Status
+);
+
 public record AddApplianceCategoryDto(string Name);
 
 public record AddApplianceDto(
@@ -33,6 +45,19 @@ public record AddApplianceUsageLogDto(
     decimal CostAmount,
     int Quantity,
     int Wattage
+);
+
+public record EditApplianceUsageLogDto(
+    Guid? ApplianceId,
+    decimal? HoursPerDay,
+    int? DaysPerWeek,
+    int? WeeksPerMonth,
+    short? DaysUsedMask,
+    int? AverageWatts,
+    decimal? EnergyKwh,
+    decimal? CostAmount,
+    int? Quantity,
+    int? Wattage
 );
 
 public record AddEnergyTariffDto(

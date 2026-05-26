@@ -1,10 +1,10 @@
 import { requestJson } from "./ApiClient"
 
-export const AddApplianceCategoryAsync = async (applianceCategory) => {
+export const addApplianceCategoryAsync = async (applianceCategory) => {
     return requestJson('appliances/categories', {
         method: 'POST',
         body: JSON.stringify(applianceCategory)
     })
 }
 
-export const GetAllApplianceCategories = async () => requestJson('appliances/categories')
+export const getAllApplianceCategories = async () => requestJson('appliances/categories')

@@ -44,4 +44,29 @@ public class BillService
             .OrderByDescending(b => b.BillingMonth)
             .ToListAsync();
     }
+
+    public async Task<Bill?> UpdateBillAsync(Guid billId, EditBillDto dto, Guid userId)
+    {
+        var existingBill = await _context.Bills.FindAsync(billId);
+
+        if (existingBill == null || existingBill.UserId != userId)
+        {
+            return null;
+        }
+
+        existingBill.BillingMonth = dto.BillingMonth ?? existingBill.BillingMonth;
+        existingBill.DueDate = dto.DueDate ?? existingBill.DueDate;
+        existingBill.GenerationAmount = dto.GenerationAmount ?? existingBill.GenerationAmount;
+        existingBill.TransmissionAmount = dto.TransmissionAmount ?? existingBill.TransmissionAmount;
+        existingBill.DistributionAmount = dto.DistributionAmount ?? existingBill.DistributionAmount;
+        existingBill.GovernmentTaxAmount = dto.GovernmentTaxAmount ?? existingBill.GovernmentTaxAmount;
+        existingBill.EnergyKwh = dto.EnergyKwh ?? existingBill.EnergyKwh;
+        existingBill.TotalAmount = dto.TotalAmount ?? existingBill.TotalAmount;
+        existingBill.Status = dto.Status ?? existingBill.Status;
+
+        _context.Bills.Update(existingBill);
+        await _context.SaveChangesAsync();
+
+        return existingBill;
+    }
 }

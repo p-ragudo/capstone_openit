@@ -8,3 +8,10 @@ export const addBill = async (bill) => {
 }
 
 export const getAllBills = async () => requestJson('bills')
+
+export const updateBill = async (id, updatedFields) => {
+    return requestJson(`bills/${id}`, {
+        method: 'PUT',
+        body: JSON.stringify(updatedFields)
+    })
+}

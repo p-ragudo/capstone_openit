@@ -41,4 +41,22 @@ public class BillsController : ControllerBase
         var result = await _billService.GetUserBillsAsync(userId);
         return Ok(result);
     }
+
+    [HttpPut("{id:guid}")]
+    public async Task<IActionResult> Update([FromRoute] Guid id, [FromBody] EditBillDto request)
+    {
+        if (this.GetUserGuid() is not Guid userId)
+        {
+            return this.UnauthorizedMessage();
+        }
+
+        var updatedBill = await _billService.UpdateBillAsync(id, request, userId);
+
+        if (updatedBill == null)
+        {
+            return NotFound("Bill not found or you do not have permission to modify it.");
+        }
+
+        return Ok(updatedBill);
+    }
 }

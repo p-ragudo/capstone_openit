@@ -44,4 +44,37 @@ public class ApplianceUsageLogService
             .OrderBy(a => a.Id)
             .ToListAsync();
     }
+
+    public async Task<ApplianceUsageLog?> UpdateApplianceUsageLogAsync(long logId, EditApplianceUsageLogDto dto, Guid userId)
+{
+    var existingLog = await _context.ApplianceUsageLogs.FindAsync(logId);
+
+    if (existingLog == null || existingLog.UserId != userId)
+    {
+        return null;
+    }
+
+    existingLog.ApplianceId = dto.ApplianceId ?? existingLog.ApplianceId;
+    existingLog.HoursPerDay = dto.HoursPerDay ?? existingLog.HoursPerDay;
+    existingLog.DaysPerWeek = dto.DaysPerWeek ?? existingLog.DaysPerWeek;
+    existingLog.WeeksPerMonth = dto.WeeksPerMonth ?? existingLog.WeeksPerMonth;
+    existingLog.DaysUsedMask = dto.DaysUsedMask ?? existingLog.DaysUsedMask;
+    existingLog.AverageWatts = dto.AverageWatts ?? existingLog.AverageWatts;
+    existingLog.Quantity = dto.Quantity ?? existingLog.Quantity;
+    existingLog.Wattage = dto.Wattage ?? existingLog.Wattage;
+
+    existingLog.EnergyKwh = existingLog.AverageWatts / 1000m
+        * existingLog.HoursPerDay 
+        * existingLog.DaysPerWeek 
+        * existingLog.WeeksPerMonth 
+        * existingLog.Quantity;
+
+    if (dto.EnergyKwh.HasValue) existingLog.EnergyKwh = dto.EnergyKwh.Value;
+    if (dto.CostAmount.HasValue) existingLog.CostAmount = dto.CostAmount.Value;
+
+    _context.ApplianceUsageLogs.Update(existingLog);
+    await _context.SaveChangesAsync();
+
+    return existingLog;
+}
 }
