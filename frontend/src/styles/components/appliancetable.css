@@ -1,0 +1,88 @@
+.ta-appliances-card {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  z-index: 1;
+}
+.ta-appliances-title { font-size: 18px; font-weight: 700; color: var(--text-strong); margin-bottom: 16px; flex-shrink: 0; }
+
+.ta-table-wrap { flex: 1; min-height: 0; overflow-y: auto; }
+
+.ta-table { width: 100%; border-collapse: separate; border-spacing: 0; }
+
+.ta-table thead th {
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  padding: 0 16px 12px;
+  text-align: left;
+  position: sticky;
+  top: 0;
+  background: transparent;
+  z-index: 2;
+}
+.ta-table thead th:first-child { padding-left: 0; }
+
+.ta-table tbody td             { padding: 14px 16px; vertical-align: middle; }
+.ta-table tbody td:first-child { padding-left: 0; }
+
+/* ── Rows ── */
+.ta-row { transition: background var(--t-base); }
+.ta-row:hover td             { background: rgba(255, 255, 255, 0.55); position: relative; z-index: 1; }
+.ta-row:hover td:first-child { border-radius: var(--radius-md) 0 0 var(--radius-md); }
+.ta-row:hover td:last-child  { border-radius: 0 var(--radius-md) var(--radius-md) 0; }
+
+/* ── Cells ── */
+.ta-td-rank { width: 60px; }
+.ta-rank {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 30px;
+  border-radius: var(--radius-pill);
+  font-weight: 700;
+  font-size: 16px;
+}
+.ta-rank-gold { background: var(--amber); color: #fff; }
+.ta-rank-grey { background: #ebebeb; color: #555; }
+
+.ta-td-name {
+  font-weight: 600;
+  font-size: 15px;
+  color: var(--text-strong);
+  max-width: 180px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.ta-td-status { font-size: 14px; color: var(--text-muted); }
+.ta-td-watts  { font-size: 14px; color: var(--text-strong); }
+.ta-td-cost   { font-size: 15px; color: var(--text-strong); }
+.ta-cost-gold { color: var(--amber-gold); font-weight: 700; }
+
+/* ── Row actions ── */
+.ta-td-actions { width: 80px; }
+.ta-actions { display: flex; gap: 8px; justify-content: flex-end; opacity: 0; transition: opacity var(--t-base); }
+.ta-row:hover .ta-actions { opacity: 1; }
+
+.ta-act-edit,
+.ta-act-delete {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background var(--t-fast);
+}
+.ta-act-edit   { background: #e5e7eb; color: #374151; }
+.ta-act-delete { background: #fee2e2; color: #dc2626; }
+.ta-act-edit:hover   { background: #d1d5db; }
+.ta-act-delete:hover { background: #fecaca; }

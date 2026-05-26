@@ -1,4 +1,5 @@
 import { useState, useRef, useEffect } from "react";
+import "../styles/components/navbar.css";
 import { NavLink } from "react-router-dom";
 import { useAuth } from "../contexts/AuthContext";
 import Logo from "../assets/Logo.png";

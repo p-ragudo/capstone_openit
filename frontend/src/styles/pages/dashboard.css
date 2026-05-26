@@ -1,0 +1,103 @@
+.dashboard-main {
+  flex: 1;
+  min-height: 0;
+  padding: 8px 48px 32px;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ── Background blobs ── */
+.blob {
+  position: absolute;
+  width: 750px;
+  height: 750px;
+  border-radius: 50%;
+  background: rgba(235, 160, 35, 0.55);
+  filter: blur(120px);
+  pointer-events: none;
+  z-index: 0;
+}
+.blob-left  { bottom: -320px; left:  -120px; }
+.blob-right { bottom: -320px; right: -120px; }
+
+.welcome-text {
+  font-size: 62px;
+  font-weight: 400;
+  color: var(--text-strong);
+  letter-spacing: -2px;
+  margin: 0 0 14px;
+  flex-shrink: 0;
+  position: relative;
+  z-index: 1;
+}
+
+/* ── Grid layout ── */
+.dashboard-grid {
+  flex: 1;
+  min-height: 0;
+  display: grid;
+  grid-template-columns: 220px 1fr 360px;
+  grid-template-rows: auto 1fr;
+  gap: 16px;
+  position: relative;
+  z-index: 1;
+}
+
+.dashboard-asset {
+  position: absolute;
+  left: -48px;
+  top: -40px;
+  height: 75%;
+  width: auto;
+  z-index: 20;
+  pointer-events: none;
+  object-fit: contain;
+  object-position: bottom left;
+}
+
+.center-cards {
+  grid-column: 2;
+  grid-row: 1;
+  display: flex;
+  gap: 14px;
+  align-self: start;
+}
+.center-cards .card { flex: 1; }
+
+.top-consumers-card { grid-column: 3; grid-row: 1 / 3; display: flex; flex-direction: column; }
+
+.monthly-card {
+  grid-column: 1 / 3;
+  grid-row: 2;
+  display: flex;
+  flex-direction: column;
+  overflow: visible;
+  position: relative;
+  z-index: 10;
+}
+
+.monthly-card-header {
+  position: absolute;
+  top: 18px;
+  right: 18px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.monthly-card-title { font-size: 16px; font-weight: 400; color: var(--text-strong); }
+
+.monthly-arrow-btn {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.88);
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #555;
+  flex-shrink: 0;
+}

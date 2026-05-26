@@ -1,0 +1,27 @@
+/* ── Days ── */
+.days-row { display: flex; gap: 8px; margin-top: 12px; flex-wrap: wrap; }
+
+.day-btn {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 1.5px solid var(--amber);
+  background: transparent;
+  color: var(--amber-gold);
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background var(--t-base), color var(--t-base);
+}
+.day-active { background: var(--amber); color: #fff; }
+
+/* ── Cost estimate ── */
+.calc-estimate    { flex: 1; display: flex; flex-direction: column; }
+.calc-est-heading { display: block; font-size: 16px; font-weight: 700; color: var(--text-strong); margin-bottom: 4px; }
+.calc-est-name    { display: block; font-size: 15px; font-weight: 600; color: var(--amber-dark); margin-bottom: 12px; line-height: 1.3; }
+
+.cost-grid  { display: grid; grid-template-columns: 1fr 1fr; gap: 18px 28px; flex: 1; margin-bottom: 20px; }
+.cost-label { display: block; font-size: 13px; color: var(--text-muted); margin-bottom: 4px; }
+.cost-val   { display: block; font-size: 20px; font-weight: 700; color: var(--text-strong); }
+
+.calc-actions { display: flex; gap: 12px; margin-top: auto; }
