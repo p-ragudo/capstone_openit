@@ -1,3 +1,4 @@
+import "../../styles/components/appliancetable.css";
 import { useAppliances } from "../../contexts/ApplianceContext";
 import { PencilIcon, XIcon } from "../Icons";
 

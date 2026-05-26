@@ -1,4 +1,5 @@
 import { useState } from "react";
+import "../styles/pages/appliances.css";
 import { useLocation } from "react-router-dom";
 import Navbar from "../components/Navbar";
 import ConsumptionBreakdownCard from "../components/appliances/ConsumptionBreakdownCard";

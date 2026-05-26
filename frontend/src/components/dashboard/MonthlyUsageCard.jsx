@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import "../../styles/components/barchart.css";
 
 const CHART_DATA = [
   { month: "Jan", pct: 28,  kwh: 255, amount: "₱1,175" },

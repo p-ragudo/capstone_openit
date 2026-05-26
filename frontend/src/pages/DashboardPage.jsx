@@ -1,3 +1,4 @@
+import "../styles/pages/dashboard.css";
 import Navbar from "../components/Navbar";
 import EstimatedConsumptionCard from "../components/dashboard/EstimatedConsumptionCard";
 import LastMonthBillCard from "../components/dashboard/LastMonthBillCard";

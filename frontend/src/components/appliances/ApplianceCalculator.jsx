@@ -1,3 +1,6 @@
+import "../../styles/components/calculator.css";
+import "../../styles/components/calculator-controls.css";
+import "../../styles/components/calculator-result.css";
 import { useCalculator } from "../../hooks/useCalculator";
 import { CATEGORIES, SEARCH_LABELS, DAYS_LABELS } from "../../utils/applianceData";
 import { CATEGORY_ICONS } from "./CategoryIcons";

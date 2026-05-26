@@ -1,5 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { ArrowBtn } from "../Icons";
+import "../../styles/components/consumers.css";
 
 const TOP_CONSUMERS = [
   { rank: 1, name: "Air Conditioner", watts: 52,  note: "8 HRS / 3 DAYS / WEEK",  cost: "₱2,840" },

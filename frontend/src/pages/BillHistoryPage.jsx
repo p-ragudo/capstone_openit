@@ -1,4 +1,5 @@
 import { useState } from "react";
+import "../styles/pages/billhistory.css";
 import { useLocation } from "react-router-dom";
 import Navbar from "../components/Navbar";
 import BillStatsHeader from "../components/billhistory/BillStatsHeader";

@@ -1,5 +1,7 @@
 import { Routes, Route, Navigate } from 'react-router-dom'
-import './styles/App.css'
+import './styles/global/base.css'
+import './styles/global/fab.css'
+import './styles/global/modal.css'
 import { useAuth } from './contexts/AuthContext'
 import { BillProvider } from './contexts/BillContext'
 import { ApplianceProvider } from './contexts/ApplianceContext'

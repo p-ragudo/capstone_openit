@@ -1,0 +1,74 @@
+:root {
+  /* ── Brand palette ── */
+  --bg:         #FFF8E5;
+  --brand:      #8B6510;
+  --amber:      #E8B84B;   /* primary accent */
+  --amber-dark: #E07A10;   /* deeper orange  */
+  --amber-gold: #B8860B;   /* dark-gold text */
+
+  /* ── Text scale ── */
+  --text:        #333333;
+  --text-muted:  #777777;
+  --text-strong: #1a1a1a;
+
+  /* ── UI chrome ── */
+  --border: #e5e0d0;
+  --shadow: rgba(0, 0, 0, 0.08);
+  --white:  #ffffff;
+
+  /* ── Glass surface ── */
+  --glass-bg:   rgba(255, 255, 255, 0.38);
+  --glass-blur: 16px;
+
+  /* ── Border-radius scale ── */
+  --radius-sm:   8px;
+  --radius-md:   12px;
+  --radius-lg:   16px;
+  --radius-xl:   22px;
+  --radius-pill: 999px;
+
+  /* ── Motion ── */
+  --t-fast: 0.12s;
+  --t-base: 0.15s;
+
+  /* ── Z-index ── */
+  --z-fab:   200;
+  --z-modal: 500;
+
+  /* ── Legacy alias (navbar still uses this) ── */
+  --pill-active: var(--amber);
+
+  /* ── Typography ── */
+  --sans: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', system-ui, sans-serif;
+
+  font-family: var(--sans);
+  font-size: 16px;
+  line-height: 1.5;
+  color: var(--text);
+  background: var(--bg);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  min-height: 100vh;
+}
+
+#root {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  margin: 0;
+  font-family: var(--sans);
+  color: var(--text);
+}
+
+p      { margin: 0; }
+button { font-family: var(--sans); }

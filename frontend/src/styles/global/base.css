@@ -1,0 +1,60 @@
+/* ── Page shell ── */
+.page {
+  height: 100vh;
+  overflow: hidden;
+  background: var(--bg);
+  display: flex;
+  flex-direction: column;
+}
+
+/* ── Glass card ── */
+.card {
+  background: var(--glass-bg);
+  backdrop-filter: blur(var(--glass-blur));
+  -webkit-backdrop-filter: blur(var(--glass-blur));
+  border-radius: var(--radius-xl);
+  padding: 22px 24px;
+  position: relative;
+}
+
+.card-arrow-btn {
+  position: absolute;
+  top: 18px;
+  right: 18px;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.88);
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #555;
+}
+
+.card-title-row {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--text-muted);
+  padding-right: 36px;
+  margin-bottom: 6px;
+}
+
+.card-icon    { color: var(--brand); display: flex; align-items: center; }
+.card-amount  { font-size: 42px; font-weight: 700; color: var(--text-strong); letter-spacing: -1.2px; margin: 2px 0 10px; }
+.card-foot    { display: flex; justify-content: space-between; align-items: center; font-size: 13px; }
+.card-change  { font-size: 14px; color: var(--amber-gold); font-weight: 500; margin-top: 4px; }
+.card-heading { font-size: 24px; font-weight: 400; color: var(--text-strong); margin-bottom: 0; padding-right: 40px; }
+
+.muted      { color: var(--text-muted); }
+.amber-text { color: var(--amber-gold); font-weight: 600; }
+
+/* ── Tick progress bar ── */
+.tick-bar { display: flex; justify-content: space-between; margin-bottom: 10px; }
+.tick     { height: 26px; width: 4px; border-radius: 2px; flex-shrink: 0; }
+.tick-on  { background: var(--amber); }
+.tick-off { background: #d8d0c0; }

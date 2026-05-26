@@ -1,3 +1,4 @@
+import "../../styles/components/billtable.css";
 import { useBills } from "../../contexts/BillContext";
 import { PencilIcon, XIcon, EyeIcon, ArrowUp, ArrowDown } from "../Icons";
 
