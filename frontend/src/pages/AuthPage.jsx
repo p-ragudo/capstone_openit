@@ -1,5 +1,7 @@
 import { useState } from "react"
 import { useAuth } from "../contexts/AuthContext"
+import "../styles/pages/auth.css"
+import Logo from "../assets/Logo.png"
 
 function AuthPage() {
     const { login, register } = useAuth()
@@ -23,53 +25,70 @@ function AuthPage() {
     }
 
     return (
-        <div>
-            <h1>Application</h1>
-            <div>
-                {/* Replace span with p or any h1, h2 if any styling complications */}
-                <span>{ view === 'register' ? 'Register' : 'Login' }</span>
-
-                { 
-                    view === 'register' ?
-                    <div>
-                        <label>Name</label>
-                        <input 
-                            type="text"
-                            value={displayName}
-                            onChange={e => setDisplayName(e.target.value)}
-                        />
+        <div className="auth-page">
+            <div className="auth-blob auth-blob-left" />
+            <div className="auth-blob auth-blob-right" />
+            <div className="auth-card">
+                <div className="auth-brand">
+                    <img src={Logo} alt="Liwanag logo" className="auth-logo" />
+                    <div className="auth-brand-text">
+                        <span className="auth-brand-title">Liwanag</span>
+                        <span className="auth-brand-sub">Energy Insight System</span>
                     </div>
-                    : <></>
-                }
-
-                <div>
-                    <label>Email</label>
-                    <input 
-                        type="text"
-                        value={email}
-                        onChange={e => setEmail(e.target.value)}
-                    />
                 </div>
 
-                <div>
-                    <label>Password</label>
-                    <input 
-                        type="password"
-                        value={password}
-                        onChange={e => setPassword(e.target.value)}
-                    />
+                <div className="auth-heading">
+                    <h1>{ view === 'register' ? 'Create your account' : 'Welcome back' }</h1>
+                    <p>{ view === 'register' ? 'Track costs and keep your household efficient.' : 'Sign in to see your latest usage.' }</p>
                 </div>
 
-                {error && <p className="error">Failed to login or register</p>}
+                <div className="auth-form">
+                    {view === 'register' && (
+                        <label className="auth-field">
+                            <span>Name</span>
+                            <input
+                                type="text"
+                                value={displayName}
+                                onChange={e => setDisplayName(e.target.value)}
+                                placeholder="Your name"
+                            />
+                        </label>
+                    )}
 
-                <button onClick={handleSubmit}>
-                    { view === 'register' ? "Register" : "Login" }
-                </button>
+                    <label className="auth-field">
+                        <span>Email</span>
+                        <input
+                            type="email"
+                            value={email}
+                            onChange={e => setEmail(e.target.value)}
+                            placeholder="you@email.com"
+                        />
+                    </label>
 
-                <p>
-                    { view === 'register' ? "Already have an account?" : "Don't have an account?"}
-                    <button onClick={() => { setView(view === 'register' ? "login" : "register"); setError(null) }}>
-                        { view === 'register' ? 'Login' : "Register"}
+                    <label className="auth-field">
+                        <span>Password</span>
+                        <input
+                            type="password"
+                            value={password}
+                            onChange={e => setPassword(e.target.value)}
+                            placeholder="••••••••"
+                        />
+                    </label>
+
+                    {error && <p className="auth-error">Failed to login or register.</p>}
+
+                    <button className="auth-submit" onClick={handleSubmit}>
+                        { view === 'register' ? "Create Account" : "Login" }
+                    </button>
+                </div>
+
+                <p className="auth-switch">
+                    { view === 'register' ? "Already have an account?" : "Don't have an account?" }
+                    <button
+                        className="auth-link"
+                        onClick={() => { setView(view === 'register' ? "login" : "register"); setError(null) }}
+                    >
+                        { view === 'register' ? 'Login' : "Register" }
                     </button>
                 </p>
             </div>
