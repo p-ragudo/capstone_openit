@@ -2686,11 +2686,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\projects\\bootcamp\\capstone_openit\\backend\\backend.csproj",
+      "projectUniqueName": "D:\\projects\\bootcamp\\help\\capstone_openit\\backend\\backend.csproj",
       "projectName": "backend",
-      "projectPath": "D:\\projects\\bootcamp\\capstone_openit\\backend\\backend.csproj",
+      "projectPath": "D:\\projects\\bootcamp\\help\\capstone_openit\\backend\\backend.csproj",
       "packagesPath": "C:\\Users\\Paolo Ragudo\\.nuget\\packages\\",
-      "outputPath": "D:\\projects\\bootcamp\\capstone_openit\\backend\\obj\\",
+      "outputPath": "D:\\projects\\bootcamp\\help\\capstone_openit\\backend\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Paolo Ragudo\\AppData\\Roaming\\NuGet\\NuGet.Config"

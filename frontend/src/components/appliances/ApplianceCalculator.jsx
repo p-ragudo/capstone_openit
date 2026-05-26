@@ -4,8 +4,10 @@ import "../../styles/components/calculator-result.css";
 import { useCalculator } from "../../hooks/useCalculator";
 import { CATEGORIES, SEARCH_LABELS, DAYS_LABELS } from "../../utils/applianceData";
 import { CATEGORY_ICONS } from "./CategoryIcons";
+import { useApplianceUsageLogs } from "../../contexts/ApplianceUsageLogContext";
 
 export default function ApplianceCalculator({ onAdd, onCancel }) {
+  const { usageLogs, addLog } = useApplianceUsageLogs()
   const calc = useCalculator();
   const fmt  = n => n.toFixed(2);
 

@@ -1,4 +1,5 @@
 import { useAppliances } from "../../contexts/ApplianceContext";
+import { useApplianceUsageLogs } from "../../contexts/ApplianceUsageLogContext";
 
 function CalendarDecorIcon() {
   return (
@@ -29,12 +30,17 @@ function MoneyDecorIcon() {
 }
 
 export default function ApplianceStatCards() {
-  const { totalKwh, totalCost } = useAppliances();
+  const { appliances } = useAppliances()
+  const { usageLogs } = useApplianceUsageLogs()
+
+  const totalCost = usageLogs.reduce((sum, log) => sum + (log.costAmount ?? 0), 0)
+  const totalEnergyCost = usageLogs.reduce((sum, log) => sum + (log.energyKwh ?? 0), 0)
+
   return (
     <>
       <div className="card ta-stat-card">
         <div className="ta-stat-decor"><CalendarDecorIcon /></div>
-        <div className="ta-stat-number">{totalKwh.toFixed(1)}</div>
+        <div className="ta-stat-number">{totalEnergyCost.toFixed(1)}</div>
         <div className="ta-stat-label">Monthly kWh</div>
       </div>
       <div className="card ta-stat-card">

@@ -1,9 +1,12 @@
 import "../../styles/components/appliancetable.css";
 import { useAppliances } from "../../contexts/ApplianceContext";
 import { PencilIcon, XIcon } from "../Icons";
+import { useApplianceUsageLogs } from "../../contexts/ApplianceUsageLogContext";
 
 export default function AppliancesTable({ onEditClick }) {
-  const { ranked, deleteAppliance } = useAppliances();
+  const { usageLogs } = useApplianceUsageLogs()
+  const { appliances, getApplianceById } = useAppliances()
+
   return (
     <div className="card ta-appliances-card">
       <h2 className="ta-appliances-title">Tracked appliances</h2>
@@ -20,19 +23,19 @@ export default function AppliancesTable({ onEditClick }) {
             </tr>
           </thead>
           <tbody>
-            {ranked.map((a, idx) => (
+            {usageLogs.map((a, idx) => (
               <tr key={a.id} className="ta-row">
                 <td className="ta-td-rank">
                   <span className={`ta-rank ${idx === 0 ? "ta-rank-gold" : "ta-rank-grey"}`}>{idx + 1}</span>
                 </td>
-                <td className="ta-td-name">{a.name}</td>
-                <td className="ta-td-status">{a.status}</td>
-                <td className="ta-td-watts">{a.watts} W</td>
-                <td className={`ta-td-cost${idx === 0 ? " ta-cost-gold" : ""}`}>₱{a.costPerMonth.toLocaleString("en-PH")}</td>
+                <td className="ta-td-name">{getApplianceById(a.applianceId)?.name}</td>
+                <td className="ta-td-status">Ongoing</td>
+                <td className="ta-td-watts">{a.averageWatts} W</td>
+                <td className={`ta-td-cost${idx === 0 ? " ta-cost-gold" : ""}`}>₱{a.costAmount.toLocaleString("en-PH")}</td>
                 <td className="ta-td-actions">
                   <div className="ta-actions">
                     <button className="ta-act-edit"   aria-label="Edit"   onClick={() => onEditClick(a)}><PencilIcon /></button>
-                    <button className="ta-act-delete" aria-label="Delete" onClick={() => deleteAppliance(a.id)}><XIcon /></button>
+                    <button className="ta-act-delete" aria-label="Delete" onClick={() => console.log("TO IMPLEMENT")}><XIcon /></button>
                   </div>
                 </td>
               </tr>
