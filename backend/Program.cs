@@ -16,6 +16,7 @@ builder.Services.AddScoped<BillService>();
 builder.Services.AddScoped<ApplianceCategoryService>();
 builder.Services.AddScoped<ApplianceService>();
 builder.Services.AddScoped<ApplianceUsageLogService>();
+builder.Services.AddScoped<EnergyTariffService>();
 
 
 builder.Services.AddCors(options => {

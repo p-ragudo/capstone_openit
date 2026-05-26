@@ -34,3 +34,11 @@ public record AddApplianceUsageLogDto(
     int Quantity,
     int Wattage
 );
+
+public record AddEnergyTariffDto(
+    string UtilityName,
+    string Region,
+    decimal RatePerKwh,
+    DateOnly EffectiveFrom,
+    DateOnly EffectiveTo
+);
